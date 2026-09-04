@@ -1,3 +1,0 @@
-codenotary:
-  signer: cnathanorick@gmail.com
-  base_image: notary@home-assistant.io

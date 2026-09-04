@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.0.0
+
+- Add a standalone, non-root Docker image with a built-in health check.
+- Add environment-variable and Docker secret configuration.
+- Remove legacy platform metadata and runtime integrations.
+- Add Docker Compose and local tests for standalone operation.
+- Add multi-platform publishing to GitHub Container Registry through GitHub
+  Actions, with an optional local publishing script.
+- Stop logging one-time authentication data and improve upstream error handling.
+
 ## 1.5.0
 ### Added
 - Redirect to a different dashboard by providing a `d=<dashboard>` query parameter in the link
@@ -50,4 +60,4 @@
 
 ### Changed
 
-- Turn ha-auto-guest-login into a Home Assistant Addon
+- Initial packaged release.

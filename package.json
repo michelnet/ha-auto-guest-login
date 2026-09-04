@@ -1,0 +1,21 @@
+{
+  "name": "ha-auto-guest-login",
+  "version": "2.0.0",
+  "description": "Standalone Docker service for Home Assistant guest auto-login",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "author": "Nathan Orick",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "qrcode": "^1.5.4"
+  }
+}

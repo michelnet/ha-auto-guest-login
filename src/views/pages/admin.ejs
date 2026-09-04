@@ -51,13 +51,13 @@
 <body>
     <div class="header-container">
         <div class="image-container">
-            <img class="logo-image" src="admin/assets/logo.png"/>
+            <img class="logo-image" src="assets/logo.png"/>
         </div>
         <h1>Admin</h1>
         <span class="spacer"></span>
     </div>
     <div class="main-content">
-        <div class="warning">Note: This page must be accessed from your local Home Assistant url. If you access this from an external url, the link and QR code will not be correct.</div>
+        <div class="warning">Keep this guest-login URL on a trusted local network. The link and QR code use APP_PUBLIC_URL when configured, otherwise they use the current request URL.</div>
         <p class="content-text">
             Guest Login Url: <a href="<%= guestLoginUrl %>"><%= guestLoginUrl %></a>
         </p>
@@ -66,8 +66,8 @@
         </p>
         <p class="content-text">This QR can be shared with your guests to make it easier to log into Home Assistant.</p>
         <p class="content-text">Click the QR code to open the image for printing.</p>
-        <a href="admin/qr.svg" class="qr-code">
-            <img src="admin/qr.svg">
+        <a href="qr.svg" class="qr-code">
+            <img src="qr.svg" alt="Guest login QR code">
         </a>
     </div>
 </body>

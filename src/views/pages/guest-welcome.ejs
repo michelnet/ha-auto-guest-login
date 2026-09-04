@@ -47,8 +47,13 @@
 <script>
     const minTime = <%= delay %>;
     const startTime = (new Date()).getTime();
-    fetch('/api/getRedirectUri')
-    .then(res => res.text())
+    fetch('/api/redirect-uri', { method: 'POST', cache: 'no-store' })
+    .then(res => {
+        if (!res.ok) {
+            throw new Error('Home Assistant login could not be created');
+        }
+        return res.text();
+    })
     .then(uri => {
         const endTime = (new Date()).getTime();
         const elapsedTime = endTime - startTime;
@@ -61,6 +66,9 @@
             uri = uriObj.toString();
         }
         setTimeout(() => window.location.replace(uri), delay);
+    })
+    .catch(error => {
+        document.querySelector('.secondary-text').textContent = error.message;
     });
 </script>
 
@@ -68,7 +76,7 @@
 <body>
     <div class="main">
         <h1 class="title"><%= mainText %></h1>
-        <span><%= secondaryText %></span>
+        <span class="secondary-text"><%= secondaryText %></span>
     </div>
 </body>
 </html>
