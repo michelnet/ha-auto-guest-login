@@ -10,6 +10,34 @@ Home Assistant account. It runs as a standalone Docker container.
 
 ## Standalone Docker
 
+### Run the published image
+
+The [GHCR Compose example](compose.ghcr.yaml) downloads the ready-to-run image
+from GitHub Container Registry and does not build anything locally:
+
+```sh
+cp .env.example .env
+# Edit .env before starting the service.
+docker compose --file compose.ghcr.yaml pull
+docker compose --file compose.ghcr.yaml up --detach
+```
+
+The example uses `latest` and checks for a newer image whenever the service is
+started. For a reproducible deployment, replace `latest` in
+`compose.ghcr.yaml` with a release tag such as `2.0.0`.
+
+To update an existing installation:
+
+```sh
+docker compose --file compose.ghcr.yaml pull
+docker compose --file compose.ghcr.yaml up --detach
+```
+
+The GHCR package must be public. If it is private, authenticate Docker to
+`ghcr.io` before running these commands.
+
+### Build locally
+
 Copy and edit the example configuration:
 
 ```sh
@@ -27,7 +55,7 @@ The service is then available at:
 reachable from each guest's browser. These URLs are often identical, but can
 differ when Docker DNS, split DNS, or a reverse proxy is used.
 
-To build and run without Compose:
+To build and run locally without Compose:
 
 ```sh
 docker build --tag ha-auto-guest-login .

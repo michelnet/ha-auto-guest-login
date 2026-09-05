@@ -29,13 +29,34 @@ part of its URL after the leading slash. For
 
 ### Compose
 
-From the repository root:
+Copy and edit the environment configuration first:
 
 ```sh
 cp .env.example .env
 ```
 
-Edit `.env`, then start the service:
+To download and run the published image from GitHub Container Registry:
+
+```sh
+docker compose --file compose.ghcr.yaml pull
+docker compose --file compose.ghcr.yaml up --detach
+docker compose --file compose.ghcr.yaml logs --follow
+```
+
+The registry example uses
+`ghcr.io/michelnet/ha-auto-guest-login:latest` with `pull_policy: always`. Pin
+the image in `compose.ghcr.yaml` to a release tag such as `2.0.0` when automatic
+updates to `latest` are not desired. The package must be public, or Docker must
+already be authenticated to `ghcr.io`.
+
+Update a running registry-based installation with:
+
+```sh
+docker compose --file compose.ghcr.yaml pull
+docker compose --file compose.ghcr.yaml up --detach
+```
+
+To build the image locally from the repository instead:
 
 ```sh
 docker compose up --build --detach
@@ -45,9 +66,10 @@ docker compose logs --follow
 Open `http://<docker-host>:8675/admin` to check the generated guest URL and QR
 code. Test the guest URL in a private browser window.
 
-The supplied `compose.yaml` runs the container read-only, drops Linux
-capabilities, sets `no-new-privileges`, and adds a small temporary `/tmp`.
-The application itself stores no persistent data.
+Both supplied Compose files run the container read-only, drop Linux
+capabilities, set `no-new-privileges`, and add a small temporary `/tmp`.
+`compose.yaml` builds locally, while `compose.ghcr.yaml` pulls the published
+image. The application itself stores no persistent data.
 
 ### Direct Docker run
 
